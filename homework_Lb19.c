@@ -32,12 +32,12 @@ int main()
 	int size;
 	char fname[20] = "engine.txt";
 
-	printf("Введите количество движков\n");
+	printf("Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¤ГўГЁГ¦ГЄГ®Гў\n");
 	scanf("%d", &size);
 
 	Engine* one = (Engine*)malloc(size * sizeof(Engine));
 	if (one == NULL) {
-		printf("Ошибка выделения памяти!\n");
+		printf("ГЋГёГЁГЎГЄГ  ГўГ»Г¤ГҐГ«ГҐГ­ГЁГї ГЇГ Г¬ГїГІГЁ!\n");
 		return 0;
 	}
 	for (int i = 0; i < size; i++) {
@@ -51,24 +51,24 @@ int main()
 int input_engine(Engine* one, int size)
 {
 	getchar();
-	puts("Введите название:");
+	puts("Г‚ГўГҐГ¤ГЁГІГҐ Г­Г Г§ГўГ Г­ГЁГҐ:");
 	fgets(one->name, sizeof(one->name), stdin);
 	one->name[strcspn(one->name, "\n")] = 0;
 	
-	puts("Введите целевую платформу:");
+	puts("Г‚ГўГҐГ¤ГЁГІГҐ Г¶ГҐГ«ГҐГўГіГѕ ГЇГ«Г ГІГґГ®Г°Г¬Гі:");
 	fgets(one->target_platform, sizeof(one->target_platform), stdin);
 	one->target_platform[strcspn(one->target_platform, "\n")] = 0;
 
-	puts("Введите стабильный FPS:");
+	puts("Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ ГЎГЁГ«ГјГ­Г»Г© FPS:");
 	scanf("%f", &one->stable_fps);
 	getchar();
 
-	puts("Поддержка физики (+ - да, - - нет):");
+	puts("ГЏГ®Г¤Г¤ГҐГ°Г¦ГЄГ  ГґГЁГ§ГЁГЄГЁ (+ - Г¤Г , - - Г­ГҐГІ):");
 	scanf(" %c", &one->physics_support);
 
 
 	int graphics;
-	puts("Введите качество графики (1 - Низкое /2 - Среднее /3 - Высокое):");
+	puts("Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ Г·ГҐГ±ГІГўГ® ГЈГ°Г ГґГЁГЄГЁ (1 - ГЌГЁГ§ГЄГ®ГҐ /2 - Г‘Г°ГҐГ¤Г­ГҐГҐ /3 - Г‚Г»Г±Г®ГЄГ®ГҐ):");
 	scanf("%d", &graphics);
 
 	if (graphics < 1 || graphics > 3) {
@@ -77,10 +77,10 @@ int input_engine(Engine* one, int size)
 	one->graphics_quality = (Graphics_Quality)graphics;
 
 
-	puts("Введите размер SDK:");
+	puts("Г‚ГўГҐГ¤ГЁГІГҐ Г°Г Г§Г¬ГҐГ° SDK:");
 	scanf("%f", &one->size_sdk);
 
-	puts("Введите стоимость лицензии:");
+	puts("Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ®ГЁГ¬Г®Г±ГІГј Г«ГЁГ¶ГҐГ­Г§ГЁГЁ:");
 	scanf("%lf", &one->license_cost);
 	puts("-----------------------------------------------------------");
 }
@@ -90,7 +90,7 @@ int write_file(char* fname, int size, Engine* one)
 	FILE* out;
 	if ((out = fopen(fname, "wt")) == NULL)
 	{
-		printf("Ошибка открытия файла для записи");
+		printf("ГЋГёГЁГЎГЄГ  Г®ГІГЄГ°Г»ГІГЁГї ГґГ Г©Г«Г  Г¤Г«Гї Г§Г ГЇГЁГ±ГЁ");
 		return 0;
 	}
 	for (int i = 0; i < size; i++)
@@ -98,22 +98,22 @@ int write_file(char* fname, int size, Engine* one)
 		const char* quality_str = "";
 		switch (one[i].graphics_quality) {
 		case LOW:
-			quality_str = "Низкое";
+			quality_str = "ГЌГЁГ§ГЄГ®ГҐ";
 			break;
 		case MEDIUM:
-			quality_str = "Среднее";
+			quality_str = "Г‘Г°ГҐГ¤Г­ГҐГҐ";
 			break;
 		case HIGH:
-			quality_str = "Высокое";
+			quality_str = "Г‚Г»Г±Г®ГЄГ®ГҐ";
 			break;
 		}
-		fprintf(out, "Название: %s; ", one[i].name);
-		fprintf(out, "Целевая платформа: %s; ", one[i].target_platform);
-		fprintf(out, "Стабильный FPS: %f; ", one[i].stable_fps);
-		fprintf(out, "Поддержка физики: %c; ", one[i].physics_support);
-		fprintf(out, "Качество графики: %s; ", quality_str);
-		fprintf(out, "Размер SDK: %f ГБ; ", one[i].size_sdk);
-		fprintf(out, "Стоимость лицензии: %lf\n", one[i].license_cost);
+		fprintf(out, "ГЌГ Г§ГўГ Г­ГЁГҐ: %s; ", one[i].name);
+		fprintf(out, "Г–ГҐГ«ГҐГўГ Гї ГЇГ«Г ГІГґГ®Г°Г¬Г : %s; ", one[i].target_platform);
+		fprintf(out, "Г‘ГІГ ГЎГЁГ«ГјГ­Г»Г© FPS: %f; ", one[i].stable_fps);
+		fprintf(out, "ГЏГ®Г¤Г¤ГҐГ°Г¦ГЄГ  ГґГЁГ§ГЁГЄГЁ: %c; ", one[i].physics_support);
+		fprintf(out, "ГЉГ Г·ГҐГ±ГІГўГ® ГЈГ°Г ГґГЁГЄГЁ: %s; ", quality_str);
+		fprintf(out, "ГђГ Г§Г¬ГҐГ° SDK: %f ГѓГЃ; ", one[i].size_sdk);
+		fprintf(out, "Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г«ГЁГ¶ГҐГ­Г§ГЁГЁ: %lf\n", one[i].license_cost);
 
 	}
 	fclose(out);
